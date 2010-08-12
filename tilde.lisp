@@ -120,7 +120,8 @@
 
   If a username is not found, an error of type NO-SUCH-USER is raised."
   (setf end (or end (length string)))
-  (if (char= (char string start) #\~)
+  (if (and (plusp (length string))
+           (char= (char string start) #\~))
       (multiple-value-bind (username suffix desktopp)
           (tilde-namestring-parts string :start start :end end)
         (let ((base (if desktopp
